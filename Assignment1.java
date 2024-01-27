@@ -12,6 +12,7 @@ public class Assignment1 {
         final int maxNumber = 100000000;
         final int numThreads = 8;
 
+        // Meant to improve runtime by reusing threads
         ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
         List<Future<List<Integer>>> futures = new ArrayList<>();
 
@@ -25,7 +26,6 @@ public class Assignment1 {
 
         List<Integer> primes = new ArrayList<>();
 
-        // Collect results from threads
         for (Future<List<Integer>> future : futures) {
             try {
                 primes.addAll(future.get());
@@ -83,7 +83,7 @@ class PrimeCalculator implements Callable<List<Integer>> {
         }
         return primes;
     }
-
+    // Calculate primes
     private boolean isPrime(int num) {
         if (num < 2) {
             return false;
